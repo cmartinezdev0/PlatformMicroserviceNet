@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace PlatformMicroserviceNet.Models
+namespace PlatformMicroserviceNet.Domain
 {
-    public class PlatformModel
+    public class Platform
     {
         [Key]
         [Required]

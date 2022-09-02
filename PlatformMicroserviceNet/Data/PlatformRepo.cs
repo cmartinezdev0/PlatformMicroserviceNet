@@ -1,4 +1,4 @@
-﻿using PlatformMicroserviceNet.Models;
+﻿using PlatformMicroserviceNet.Domain;
 
 namespace PlatformMicroserviceNet.Data
 {
@@ -11,7 +11,7 @@ namespace PlatformMicroserviceNet.Data
             _db = db;
         }
 
-        public void CreatePlatform(PlatformModel platform)
+        public void CreatePlatform(Platform platform)
         {
             if (platform == null) 
                 throw new ArgumentNullException(nameof(platform));
@@ -19,12 +19,12 @@ namespace PlatformMicroserviceNet.Data
             _db.Platforms.Add(platform);
         }
 
-        public IEnumerable<PlatformModel> GetAllPlatforms()
+        public IEnumerable<Platform> GetAllPlatforms()
         {
             return _db.Platforms.ToList();
         }
 
-        public PlatformModel GetPlatformById(int id)
+        public Platform GetPlatformById(int id)
         {
             return _db.Platforms.FirstOrDefault(p => p.Id == id);
         }

@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PlatformMicroserviceNet.Models;
+using PlatformMicroserviceNet.Domain;
 
 namespace PlatformMicroserviceNet.Data
 {
@@ -10,6 +10,6 @@ namespace PlatformMicroserviceNet.Data
 
         }
 
-        public DbSet<PlatformModel> Platforms { get; set; }
+        public DbSet<Platform> Platforms { get; set; }
     }
 }

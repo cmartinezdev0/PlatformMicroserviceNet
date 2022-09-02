@@ -1,4 +1,4 @@
-﻿using PlatformMicroserviceNet.Models;
+﻿using PlatformMicroserviceNet.Domain;
 
 namespace PlatformMicroserviceNet.Data
 {
@@ -6,10 +6,10 @@ namespace PlatformMicroserviceNet.Data
     {
         bool SaveChanges();
 
-        IEnumerable<PlatformModel> GetAllPlatforms();
+        IEnumerable<Platform> GetAllPlatforms();
 
-        PlatformModel GetPlatformById(int id);
+        Platform GetPlatformById(int id);
 
-        void CreatePlatform(PlatformModel platform);
+        void CreatePlatform(Platform platform);
     }
 }
