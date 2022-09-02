@@ -1,2 +1,2 @@
 # PlatformMicroserviceNet
-Testing microservice with .NET
+Testing microservice with .NET 6
