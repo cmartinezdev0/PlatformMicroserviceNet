@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PlatformMicroserviceNet.Domain;
+using PlatformMicroserviceNet.Models;
 
 namespace PlatformMicroserviceNet.Data
 {

@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using PlatformMicroserviceNet.Domain;
+using PlatformMicroserviceNet.Models;
 using PlatformMicroserviceNet.Dtos;
 
 namespace PlatformMicroserviceNet.Profiles

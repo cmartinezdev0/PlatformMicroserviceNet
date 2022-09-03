@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using PlatformMicroserviceNet.Data;
-using PlatformMicroserviceNet.Domain;
+using PlatformMicroserviceNet.Models;
 using PlatformMicroserviceNet.Dtos;
 
 namespace PlatformMicroserviceNet.Controllers
