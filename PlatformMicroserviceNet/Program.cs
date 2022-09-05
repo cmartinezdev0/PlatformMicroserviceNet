@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using PlatformMicroserviceNet.Data;
+using PlatformMicroserviceNet.SyncDataServices.Http;
+using System.Diagnostics;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,7 +17,10 @@ builder.Services.AddDbContext<AppDbContext>(opt =>
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 // Registering for DI
+builder.Services.AddHttpClient<ICommandDataClient, CommandDataClient>();
 builder.Services.AddScoped<IPlatformRepo, PlatformRepo>();
+
+Debug.WriteLine($"--> COMMAND ENDPOINT {builder.Configuration["CommandService"]}");
 
 var app = builder.Build();
 

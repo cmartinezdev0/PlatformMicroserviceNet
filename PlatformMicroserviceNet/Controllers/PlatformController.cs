@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using PlatformMicroserviceNet.Data;
 using PlatformMicroserviceNet.Models;
 using PlatformMicroserviceNet.Dtos;
+using PlatformMicroserviceNet.SyncDataServices.Http;
+using System.Diagnostics;
 
 namespace PlatformMicroserviceNet.Controllers
 {
@@ -12,12 +14,15 @@ namespace PlatformMicroserviceNet.Controllers
     {
         private readonly IPlatformRepo _platformRepo;
         private readonly IMapper _mapper;
+        private readonly ICommandDataClient _commandDataClient;
 
         public PlatformController(IPlatformRepo platformRepo, 
-            IMapper mapper)
+            IMapper mapper,
+            ICommandDataClient commandDataClient)
         {
             _platformRepo = platformRepo;
             _mapper = mapper;
+            _commandDataClient = commandDataClient;
         }
 
         [HttpGet]
@@ -37,13 +42,23 @@ namespace PlatformMicroserviceNet.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreatePlatform(PlatformCreateDto dto)
+        public async Task<IActionResult> CreatePlatform(PlatformCreateDto dto)
         {
             if (dto == null) return BadRequest();
             var platform = _mapper.Map<Platform>(dto);
             _platformRepo.CreatePlatform(platform);
             _platformRepo.SaveChanges();
             var resultDto = _mapper.Map<PlatformReadDto>(platform);
+
+            try
+            {
+                await _commandDataClient.SendPlatformToCommand(resultDto);
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(" --> ERROR SENDING NEW PLATFORM TO COMMAND", e.Message);
+            }
+            
             return CreatedAtRoute(nameof(GetPlatformById), new { Id = resultDto.Id }, resultDto);
         }
     }
